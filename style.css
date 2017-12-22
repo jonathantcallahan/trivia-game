@@ -1,0 +1,23 @@
+* {
+	font-family: sans-serif;
+}
+
+main {
+	width: 80%;
+}
+
+
+.answers, #confirm-answer {
+	background-color: gray;
+	width: 100px;
+	text-align: center;
+	padding: 8px;
+	display: inline-block;
+	margin: 10px;
+	font-size: 12px;
+}
+
+.answers:hover {
+	border: solid gray 2px;
+	background-color: white;
+}

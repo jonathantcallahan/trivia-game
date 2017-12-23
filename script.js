@@ -17,6 +17,7 @@ var triviaGame = {
 	questionCounter: 0,
 	remainingSeconds: 20,
 	confirmCounter: 0,
+	answerSelected: false,
 
 	questionArray: ["<h1>1: What is the answer to this question?</h1><div id='wrong-answer' class='answers'>Wrong answer</div><div id='correct-answer' class='answers'>Correct answer</div>", "<h1>2: What is the answer to this question?</h1><div id='wrong-answer' class='answers'>Wrong answer</div><div id='correct-answer' class='answers'>Correct answer</div>","<h1>3: What is the answer to this question?</h1><div id='wrong-answer' class='answers'>Wrong answer</div><div id='correct-answer' class='answers'>Correct answer</div>"],
 
@@ -42,6 +43,7 @@ var timer;
 
 function nextQuestion(){
 
+	triviaGame.answerSelected = false;
 	triviaGame.confirmCounter = 0;
 
 	if(triviaGame.questionCounter === triviaGame.questionArray.length){
@@ -59,16 +61,22 @@ function nextQuestion(){
 
 	triviaGame.questionCounter++;
 
-	$("#correct-answer").click(function(){
+//	$("#correct-answer").click(function(){
+//		triviaGame.correctAnswerCount++;
+//		console.log(triviaGame.correctAnswerCount)
+//	});
+
+}
+
+$("#correct-answer").click(function(){
 		triviaGame.correctAnswerCount++;
 		console.log(triviaGame.correctAnswerCount)
 	});
 
-}
-
 $(".answers").click(function(){
 	$(this).removeClass("answers").addClass("chosen-answer")
 	console.log("change answer class")
+	triviaGame.answerSelected = true;
 })
 
 $(".chosen-answer").click(function(){
@@ -79,6 +87,8 @@ $(".chosen-answer").click(function(){
 
 $("#confirm-answer").click(function(){
 	if(triviaGame.confirmCounter === 1){
+		triviaGame.confirmCounter = 0;
+		console.log(triviaGame.confirmCounter)
 		clearTimeout(confirmNext);
 		nextQuestion();
 		return;
@@ -86,7 +96,7 @@ $("#confirm-answer").click(function(){
 	triviaGame.confirmCounter++;
 	clearTimeout(newQuestionTimer);
 	$("#questions").html(triviaGame.correctAnswer[0])
-	var confirmNext = setTimeout(nextQuestion, 1500);
+	var confirmNext = setTimeout(nextQuestion, 4000);
 });
 
 

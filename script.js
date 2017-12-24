@@ -14,10 +14,13 @@ $(document).ready(function(){
 var triviaGame = {
 
 	correctAnswerCount: 0,
+	wrongAnswerCount: 0,
 	questionCounter: 0,
 	remainingSeconds: 20,
 	confirmCounter: 0,
 	answerSelected: false,
+	correctAnswer: false,
+	wrongAnswer: false,
 
 	questionArray: ["<h1>1: What is the answer to this question?</h1><div id='wrong-answer' class='answers'>Wrong answer</div><div id='correct-answer' class='answers'>Correct answer</div>", "<h1>2: What is the answer to this question?</h1><div id='wrong-answer' class='answers'>Wrong answer</div><div id='correct-answer' class='answers'>Correct answer</div>","<h1>3: What is the answer to this question?</h1><div id='wrong-answer' class='answers'>Wrong answer</div><div id='correct-answer' class='answers'>Correct answer</div>"],
 
@@ -61,27 +64,45 @@ function nextQuestion(){
 
 	triviaGame.questionCounter++;
 
-//	$("#correct-answer").click(function(){
-//		triviaGame.correctAnswerCount++;
-//		console.log(triviaGame.correctAnswerCount)
-//	});
+	$("#correct-answer").click(function(){
+		triviaGame.correctAnswer = true;
+		triviaGame.wrongAnswer = false;
+		triviaGame.answerSelected = true;
+		console.log(triviaGame.correctAnswer)
+		console.log(triviaGame.wrongAnswer)
+	});
+
+	$("#wrong-answer").click(function(){
+		triviaGame.wrongAnswer = true;
+		triviaGame.correctAnswer = false;
+		triviaGame.answerSelected = true;
+		console.log(triviaGame.correctAnswer)
+		console.log(triviaGame.wrongAnswer)
+	})
 
 }
 
-$("#correct-answer").click(function(){
-		triviaGame.correctAnswerCount++;
-		console.log(triviaGame.correctAnswerCount)
-	});
 
-$(".answers").click(function(){
-	$(this).removeClass("answers").addClass("chosen-answer")
-	console.log("change answer class")
-	triviaGame.answerSelected = true;
-})
+//$("#correct-answer").on("click", function(){
+//		triviaGame.correctAnswer = true;
+//		triviaGame.wrongAnswer = false;
+//		console.log("correct answer selected")
+//});
 
-$(".chosen-answer").click(function(){
-	$(this).removeClass("chosen-answer").addClass("answers")
-})
+//$("#wrong-answer").click(function(){
+//	triviaGame.correctAnswer = false;
+//	triviaGame.wrongAnswer = true;
+//})
+
+//$(".answers").click(function(){
+//	$(this).removeClass("answers").addClass("chosen-answer")
+//	console.log("change answer class")
+//	triviaGame.answerSelected = true;
+//})
+
+//$(".chosen-answer").click(function(){
+//	$(this).removeClass("chosen-answer").addClass("answers")
+//})
 
 
 
@@ -93,10 +114,25 @@ $("#confirm-answer").click(function(){
 		nextQuestion();
 		return;
 	}
-	triviaGame.confirmCounter++;
-	clearTimeout(newQuestionTimer);
-	$("#questions").html(triviaGame.correctAnswer[0])
-	var confirmNext = setTimeout(nextQuestion, 4000);
+
+	if(triviaGame.correctAnswer === true){
+		triviaGame.correctAnswerCount++;
+	}
+	if(triviaGame.wrongAnswer === true){
+		triviaGame.wrongAnswerCount++;
+	}
+
+	triviaGame.correctAnswer = false;
+	triviaGame.wrongAnswer = false;
+
+	if(triviaGame.answerSelected){
+		triviaGame.confirmCounter++;
+		clearTimeout(newQuestionTimer);
+		$("#questions").html(triviaGame.correctAnswer[0])
+		var confirmNext = setTimeout(nextQuestion, 4000);
+	} else {
+		return;
+	}
 });
 
 

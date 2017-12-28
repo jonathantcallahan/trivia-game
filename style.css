@@ -7,7 +7,7 @@ main {
 }
 
 
-.answers, #confirm-answer {
+.answers {
 	background-color: gray;
 	width: 100px;
 	text-align: center;
@@ -32,4 +32,17 @@ main {
 	font-size: 12px;
 	border: solid gray 2px;
 	background-color: white;
+}
+
+#confirm-answer, .start-button {
+	display: block;
+	color: white;
+	font-weight: bold;
+	background-color: green;
+	width: 100px;
+	text-align: center;
+	padding: 8px;
+	margin: 10px;
+	font-size: 12px;
+
 }

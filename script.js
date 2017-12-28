@@ -42,9 +42,9 @@ function deprecateTimer(){
 }
 
 function timerTrigger(){
-	if(triviaGame.questionCounter > 2){
-		return;
-	}
+//	if(triviaGame.questionCounter > 2){
+//		return;
+//	}
 	timer = setInterval(deprecateTimer, 1000)
 }
 

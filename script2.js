@@ -34,7 +34,7 @@ $(document).ready(function(){
 	function deprecateTimer(){
 		if(questionCounter>3){
 			console.log("test2")
-			$("#questions").html("<img src='https://i.amz.mshcdn.com/R9W_YTladVpWShfFUQ4Ja6vLZI4=/1200x630/2016%2F09%2F22%2Fb5%2F592857175_640.73223.jpg'>")
+			$("#questions").html(finalScreen)
 			$("#correct-answers").text(correctAnswerCount);
 			$("#wrong-answers").text(wrongAnswerCount);
 			return;

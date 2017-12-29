@@ -1,18 +1,20 @@
 $(document).ready(function(){
+//suspect that question sequence errors are coming from how the nextQuestion function is being called
 
-	var correctAnswerCount;
-	var wrongAnswerCount;
+	var correctAnswerCount = 0;
+	var wrongAnswerCount = 0;
 
 	// Used in the nextQuestion function to move to the next element in the questionArray
 	var questionCounter = 0;
 
 	var confirmCounter;
 
-	var remaingingSeconds;
+	var remaingingSeconds = "cheese";
 
 	var answerSelected = false;
 	var correctAnswer = false;
 	var wrongAnswer = false;
+
 	var timer;
 
 	var timerText = "<h4 id='rem-sec-holder'>Seconds Remaining: <span id='remaining-seconds'></span></span></h4>"
@@ -30,17 +32,24 @@ $(document).ready(function(){
 	$("#questions").html(startScreen);
 
 	function deprecateTimer(){
-		if(questionCounter>answerArray.length){
-			$("#questions").html(finalScreen)
+		if(questionCounter>3){
+			console.log("test2")
+			$("#questions").html("<img src='https://i.amz.mshcdn.com/R9W_YTladVpWShfFUQ4Ja6vLZI4=/1200x630/2016%2F09%2F22%2Fb5%2F592857175_640.73223.jpg'>")
+			$("#correct-answers").text(correctAnswerCount);
+			$("#wrong-answers").text(wrongAnswerCount);
+			return;
 		}
 		if(remaingingSeconds<1){
-		//	$("#questions").html(answerArray[0])
-		//	setTimeout(nextQuestion, 3000);
-		nextQuestion();
-		} else {
-			remaingingSeconds--;
-			$("#remaining-seconds").text(remaingingSeconds)
-		}
+			console.log("remaingingSecondstest")
+			$("#questions").html(answerArray[0])
+			setTimeout(nextQuestion, 3000);
+			remaingingSeconds = 23;
+			return;
+		} 
+	
+		remaingingSeconds--;
+		$("#remaining-seconds").text(remaingingSeconds)
+		
 	}
 
 	function timerTrigger(){
@@ -61,7 +70,9 @@ $(document).ready(function(){
 		correctAnswer = false;
 		wrongAnswer = false;
 
-		remaingingSeconds = 20;
+		if(remaingingSeconds === "cheese"){
+			remaingingSeconds = 20;
+		};
 
 		$("#questions").html(questionArray[questionCounter])
 		questionCounter++;
@@ -86,7 +97,7 @@ $(document).ready(function(){
 			if(!answerSelected){
 				return;
 			} else {
-				remaingingSeconds = 1;
+				remaingingSeconds = 0;
 			}
 			console.log("test");
 		})

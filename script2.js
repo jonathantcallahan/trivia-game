@@ -21,9 +21,9 @@ $(document).ready(function(){
 
 	var confirmAnswer = "<div id='confirm-answer'>Confirm</div>"
 
-	var questionArray = [timerText + "<div class='answers-container'><h1>What country are Lemurs native to?</h1><div class='wrong-answer answers'>Australia</div><div id='correct-answer' class='answers'>Madagascar</div><div class='wrong-answer answers'>Thailand</div><div class='wrong-answer answers'>Brazil</div></div>" + confirmAnswer, timerText + "<h1>2: What is the answer to this question?</h1><div id='wrong-answer' class='answers'>Wrong answer</div><div id='correct-answer' class='answers'>Correct answer</div><div id='confirm-answer'>Confirm</div>", timerText + "<h1>3: What is the answer to this question?</h1><div id='wrong-answer' class='answers'>Wrong answer</div><div id='correct-answer' class='answers'>Correct answer</div><div id='confirm-answer'>Confirm</div>"]
+	var questionArray = [timerText + "<div class='answers-container'><h1>What country are Lemurs native to?</h1><div class='wrong-answer answers'>Australia</div><div id='correct-answer' class='answers'>Madagascar</div><div class='wrong-answer answers'>Thailand</div><div class='wrong-answer answers'>Brazil</div></div>" + confirmAnswer,timerText + "<div class='answers-container'><h1>What is the worlds largest land carnivore?</h1><div class='correct-answer-answer answers'>Polar Bear</div><div class='wrong-answer answers'>Elephant</div><div class='wrong-answer answers'>Tiger</div><div class='wrong-answer answers'>Carl</div></div>" + confirmAnswer, timerText + "<div class='answers-container'><h1>Gentoo, Chinstrap, and Adelie are all species of what animal?</h1><div class='wrong-answer answers'>Dog</div><div class='correct-answer answers'>Penguin</div><div class='wrong-answer answers'>Snake</div><div class='wrong-answer answers'>Beetle</div></div>" + confirmAnswer, timerText + "<div class='answers-container'><h1>How fast can an adult Turkey fly?</h1><div class='wrong-answer answers'>15mph</div><div class='wrong-answer answers'>24mph</div><div class='wrong-answer answers'>38mph</div><div class='correct-answer answers'>55mph</div></div>" + confirmAnswer, timerText + "<div class='answers-container'><h1>Bamboo is a ___ ?</h1><div class='wrong-answer answers'>Bush</div><div class='correct-answer answers'>Grass</div><div class='wrong-answer answers'>Tree</div><div class='wrong-answer answers'>Conifer</div></div>" + confirmAnswer]
 
-	var answerArray = ["<h3>The correct answer was:</h3><div>Madagascar</div>"]
+	var answerArray = ["<h3>The correct answer was:</h3><div class='answer'>Madagascar</div>", "<h3>The correct answer was:</h3><div class='answer'>Polar Bears</div>", "<h3>The correct answer was:</h3><div class='answer'>Penguin</div>", "<h3>The correct answer was:</h3><div class='answer'>55mph</div>", "<h3>The correct answer was:</h3><div class='answer'>Grass</div>"]
 
 	var finalScreen = "<h1>Final Score</h1><h2>Correct Answers : <span id='correct-answers'></span></h2><h2>Wrong Answers: <span id='wrong-answers'></span></h2>"
 
@@ -32,7 +32,7 @@ $(document).ready(function(){
 	$("#questions").html(startScreen);
 
 	function deprecateTimer(){
-		if(questionCounter>3){
+		if(questionCounter>5){
 			console.log("test2")
 			$("#questions").html(finalScreen)
 			$("#correct-answers").text(correctAnswerCount);
@@ -41,7 +41,7 @@ $(document).ready(function(){
 		}
 		if(remaingingSeconds<1){
 			console.log("remaingingSecondstest")
-			$("#questions").html(answerArray[0])
+			$("#questions").html(answerArray[questionCounter - 1])
 			setTimeout(nextQuestion, 3000);
 			remaingingSeconds = 23;
 			return;
@@ -53,7 +53,7 @@ $(document).ready(function(){
 	}
 
 	function timerTrigger(){
-		timer = setInterval(deprecateTimer, 1000)
+		timer = setInterval(deprecateTimer, 1002)
 	}
 
 
@@ -85,7 +85,7 @@ $(document).ready(function(){
 			$(this).removeClass("answers").addClass("chosen-answer")
 		})
 
-		$("#correct-answer").click(function(){
+		$(".correct-answer").click(function(){
 			$(".chosen-answer").removeClass("chosen-answer").addClass("answers")
 			answerSelected = true;
 			wrongAnswer = false;

@@ -21,13 +21,13 @@ $(document).ready(function(){
 
 	var confirmAnswer = "<div id='confirm-answer'>Confirm</div>"
 
-	var questionArray = [timerText + "<h1>1: What is the answer to this question?</h1><div id='wrong-answer' class='answers'>Wrong answer</div><div id='correct-answer' class='answers'>Correct answer</div>" + confirmAnswer, timerText + "<h1>2: What is the answer to this question?</h1><div id='wrong-answer' class='answers'>Wrong answer</div><div id='correct-answer' class='answers'>Correct answer</div><div id='confirm-answer'>Confirm</div>", timerText + "<h1>3: What is the answer to this question?</h1><div id='wrong-answer' class='answers'>Wrong answer</div><div id='correct-answer' class='answers'>Correct answer</div><div id='confirm-answer'>Confirm</div>"]
+	var questionArray = [timerText + "<div class='answers-container'><h1>What country are Lemurs native to?</h1><div class='wrong-answer answers'>Australia</div><div id='correct-answer' class='answers'>Madagascar</div><div class='wrong-answer answers'>Thailand</div><div class='wrong-answer answers'>Brazil</div></div>" + confirmAnswer, timerText + "<h1>2: What is the answer to this question?</h1><div id='wrong-answer' class='answers'>Wrong answer</div><div id='correct-answer' class='answers'>Correct answer</div><div id='confirm-answer'>Confirm</div>", timerText + "<h1>3: What is the answer to this question?</h1><div id='wrong-answer' class='answers'>Wrong answer</div><div id='correct-answer' class='answers'>Correct answer</div><div id='confirm-answer'>Confirm</div>"]
 
-	var answerArray = ["<h3>The correct answer was:</h3><div>Correct answer</div>"]
+	var answerArray = ["<h3>The correct answer was:</h3><div>Madagascar</div>"]
 
 	var finalScreen = "<h1>Final Score</h1><h2>Correct Answers : <span id='correct-answers'></span></h2><h2>Wrong Answers: <span id='wrong-answers'></span></h2>"
 
-	var startScreen = "<h2>Press START to begin the game</h2><div class='start-button' id='start'>START</div>"
+	var startScreen = "<div class='start-screen'><h2>Press START to begin the game</h2><div class='start-button' id='start'>START</div></div>"
 
 	$("#questions").html(startScreen);
 
@@ -77,7 +77,7 @@ $(document).ready(function(){
 		$("#questions").html(questionArray[questionCounter])
 		questionCounter++;
 
-		$("#wrong-answer").click(function(){
+		$(".wrong-answer").click(function(){
 			$(".chosen-answer").removeClass("chosen-answer").addClass("answers")
 			answerSelected = true;
 			wrongAnswer = true;
